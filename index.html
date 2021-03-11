@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Card Widget</title>
+    <meta name="author" content="VK">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="lib/styles.css">
+</head>
+<body>
+<div class="mainBody">
+    <div class="widgetBox">
+        <h1>Credit Card Form</h1>
+        <div class="creditCardBox">
+            <p class="logoStyle">Credit Card</p>
+            <div class="creditCardNumberInput">
+                &#8226;&#8226;&#8226;&#8226;
+                &nbsp;&nbsp;
+                &#8226;&#8226;&#8226;&#8226;
+                &nbsp;&nbsp;
+                &#8226;&#8226;&#8226;&#8226;
+                &nbsp;&nbsp;
+                &#8226;&#8226;&#8226;&#8226;
+            </div>
+            <div class="dateValidation">
+                <div>Your Name Here</div>
+                <div>Valid Thru &nbsp;&#8226;&#8226;/&#8226;&#8226;</div>
+            </div>
+        </div>
+
+        <div class="creditCardForm">
+            <label>
+                <input type="text" class="cardNumber" id="cardFormatValidation" maxlength="19"
+                       placeholder="Card Number" oninput="cardFormatValidation()"
+                       onkeypress="return (event.charCode !==8 && event.charCode ===0 ||
+                                          (event.charCode >= 48 && event.charCode <= 57))"
+                >
+            </label>
+            <label>
+                <input type="text" class="cardName" placeholder="Your Name" maxlength="80">
+            </label>
+            <div class="validationBox">
+                <label>
+                    <input class="validThru" id="cardDateValidation"
+                           type="text" placeholder="DD/YY" maxlength="5"
+                           oninput="this.value=this.value.replace(/^(\d\d)(\d)$/g,'$1/$2')
+                           .replace(/^(\d\d\/\d\d)(\d+)$/g,'$1/$2')
+                           .replace(/[^\d\/]/g,'')"
+                           onkeypress="return (event.charCode !==8 && event.charCode ===0 ||
+                                          (event.charCode >= 48 && event.charCode <= 57))">
+                </label>
+                <label>
+                    <input class="cvvValue" type="password" placeholder="CVV"
+                           maxlength="3">
+                </label>
+            </div>
+            <input class="submitButton" type="submit" value="Pay">
+        </div>
+
+    </div>
+</div>
+</body>
+<script>
+    "use strict";
+
+    function cardFormatValidation() {
+        document.getElementById('cardFormatValidation')
+            .addEventListener('input', function (e) {
+                e.target.value = e.target.value.replace(/[^\dA-Z]/g, '').replace(/(.{4})/g, '$1 ').trim();
+            });
+    }
+</script>
+</html>
